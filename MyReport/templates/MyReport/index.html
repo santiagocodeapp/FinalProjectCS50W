@@ -1,0 +1,20 @@
+{% extends "MyReport/layout.html" %}
+
+
+{% block body %}
+
+<!-- Team Container -->
+<div class="w3-container w3-padding-64 w3-center" id="team">
+    <h2>IMG BASEBALL TEAMS</h2> 
+    <div class="w3-row"><br>
+        
+        {% for team in teams %} 
+            <div class="w3-quarter">
+                <img src="https://image.isu.pub/200501144557-265c1cb5bd58814f3ae80700bf019845/jpg/page_1.jpg" alt="Boss" style="width:45%" class="w3-circle w3-hover-opacity">
+                <h3><a href="{% url 'team' team %}" style="text-decoration: none;">{{ team }}</a></h3>
+            </div>
+        {% endfor %} 
+    </div>
+</div>
+
+{% endblock %}
