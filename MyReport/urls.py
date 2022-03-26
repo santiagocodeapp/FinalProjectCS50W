@@ -11,5 +11,6 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("team/<str:team>", views.team, name="team"),
     path("send/report", views.send_report, name="send-report"),
+    path("add/player", views.add_player, name="add-player"),
 
 ]

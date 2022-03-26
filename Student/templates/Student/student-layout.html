@@ -39,64 +39,6 @@
     </div>
   </div>
 
-  <!-- Modal 1 -->
-  <div id="id01" class="w3-modal">
-
-    <div class="w3-modal-content w3-container w3-card-4 w3-padding-16 w3-lightgray"> 
-
-      <h4 id="evaluation-name">Create Report for <strong id="sss"></strong>:</h4>
-
-      <div style="margin: 10px;">
-        <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-transparent w3-display-topright"><i id="delete-modal" class="fa fa-remove"></i></span>
-      </div>
-
-      <div class="w3-container">
-        <div style="margin-top: 20px; margin-bottom: 20px;">
-          <form class="w3-container w3-card-4 w3-padding-16 w3-white" action="{% url 'send-report' %}" method="post">
-            {% csrf_token %}
-            <div class="w3-section">      
-              <label><strong>Defese:</strong></label>
-              <textarea id="defense" rows="5" class="w3-input" type="text" name="defense" required></textarea>
-            </div>
-
-            <div class="w3-section">      
-              <label><strong>Hitting:</strong></label>
-              <textarea id="hitting" rows="5" class="w3-input" type="text" name="hitting" required></textarea>
-            </div>
-
-            <div class="w3-section">      
-              <label><strong>Pitching:</strong></label>
-              <textarea id="pitching" rows="5" class="w3-input" type="text" name="pitching" required></textarea>
-            </div>
-
-            <div class="w3-section">      
-              <label><strong>Character / Work Ethic:</strong></label>
-              <textarea id="character-work-ethic" rows="5" class="w3-input" type="text" name="character-work-ethic" required></textarea>
-            </div>
-
-            <div style="display: none;" class="w3-section">      
-              <input id="first" rows="5" class="w3-input" type="text" name="first" required></input>
-            </div>
-
-            <div style="display: none;" class="w3-section">      
-              <input id="last" rows="5" class="w3-input" type="text" name="last" required></input>
-            </div>
-
-            <div style="display: none;" class="w3-section">      
-              <input id="team" rows="5" class="w3-input" type="text" name="team" required></input>
-            </div>
-
-            <button id="send-report" type="submit" class="w3-button w3-right w3-theme">Send Report</button>
-            
-
-          </form>
-
-        </div>
-
-      </div>
-
-    </div>
-  </div>
 
  <!-- Modal 2 -->
  <div id="id02" class="w3-modal">

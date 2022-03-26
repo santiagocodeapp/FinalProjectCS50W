@@ -10,11 +10,13 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 # Index View that will return all the teams storage in the DB
+
+
 def index(request):
     if request.user.is_authenticated:
         teams = IMG_Teams.objects.all()
         is_user = True
-        return render(request, 'MyReport/index.html',{
+        return render(request, 'MyReport/index.html', {
             "is_user": is_user,
             "teams": teams
         })
@@ -49,8 +51,6 @@ def logout_view(request):
     return HttpResponseRedirect(reverse("index"))
 
 
-
-
 def register(request):
     if request.method == "POST":
         username = request.POST["username"]
@@ -68,7 +68,8 @@ def register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password, first_name = first, last_name = last)
+            user = User.objects.create_user(
+                username, email, password, first_name=first, last_name=last)
             user.save()
         except IntegrityError:
             return render(request, "MyReport/register.html", {
@@ -78,7 +79,6 @@ def register(request):
         return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "MyReport/register.html")
-
 
 
 # Here we can send and save the new reports on each players
@@ -96,25 +96,45 @@ def send_report(request):
     last = request.POST['last']
     x = request.POST['team']
 
-    player = Players.objects.get(first = first, last = last)
+    player = Players.objects.get(first=first, last=last)
 
-    report = Report(CoachName = str(request.user), Player = player, Defense = defense, Hitting = hitting, Pitching = pitching, Character_Work_Ethic = character_work_ethic)
+    report = Report(CoachName=str(request.user), Player=player, Defense=defense,
+                    Hitting=hitting, Pitching=pitching, Character_Work_Ethic=character_work_ethic)
     report.save()
 
     return team(request, f"{x}")
 
 
-
-    
-
-
 # This function look up for the players into specific team and render a new html with the results if any
 @login_required
 def team(request, team):
-    players = Players.objects.filter(team = team)
+    players = Players.objects.filter(team=team)
     is_user = True
-    return render(request, 'MyReport/team.html',{
+    return render(request, 'MyReport/team.html', {
         "team": team,
         "players": players,
         "is_user": is_user
     })
+
+
+def add_player(request):
+    if request.method == "POST":
+
+        team = request.POST['team']
+        first_name = request.POST['create-first']
+        last_name = request.POST['create-last']
+        position = request.POST['create-position']
+
+        player = Players(team=team, first=first_name,
+                         last=last_name, player_positions=position)
+        player.save()
+
+        teams = IMG_Teams.objects.all()
+        is_user = True
+        return render(request, 'MyReport/index.html', {
+            "is_user": is_user,
+            "teams": teams,
+            "message": "message",
+        })
+    else:
+        return render(request, 'MyReport/error-page.html')
