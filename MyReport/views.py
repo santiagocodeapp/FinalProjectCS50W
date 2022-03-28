@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from .models import Players, Report, User, Positions, IMG_Teams
 from django.views.decorators.csrf import csrf_exempt
-import json
+
 
 # Index View that will return all the teams storage in the DB
 
@@ -68,8 +68,7 @@ def register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(
-                username, email, password, first_name=first, last_name=last)
+            user = User.objects.create_user(username, email, password, first_name=first, last_name=last)
             user.save()
         except IntegrityError:
             return render(request, "MyReport/register.html", {
@@ -98,8 +97,7 @@ def send_report(request):
 
     player = Players.objects.get(first=first, last=last)
 
-    report = Report(CoachName=str(request.user), Player=player, Defense=defense,
-                    Hitting=hitting, Pitching=pitching, Character_Work_Ethic=character_work_ethic)
+    report = Report(CoachName=str(request.user), Player=player, Defense=defense, Hitting=hitting, Pitching=pitching, Character_Work_Ethic=character_work_ethic)
     report.save()
 
     return team(request, f"{x}")
@@ -117,24 +115,45 @@ def team(request, team):
     })
 
 
+# This Function will allow Coaches to add new player to a Team.
+@login_required
 def add_player(request):
     if request.method == "POST":
 
-        team = request.POST['team']
+        team = request.POST['exampleDataList']
         first_name = request.POST['create-first']
         last_name = request.POST['create-last']
         position = request.POST['create-position']
 
-        player = Players(team=team, first=first_name,
-                         last=last_name, player_positions=position)
+        player = Players(team=team, first=first_name, last=last_name, player_positions=position)
         player.save()
 
         teams = IMG_Teams.objects.all()
         is_user = True
+        
         return render(request, 'MyReport/index.html', {
             "is_user": is_user,
             "teams": teams,
             "message": "message",
         })
-    else:
-        return render(request, 'MyReport/error-page.html')
+
+
+# This Function will allow coaches to create new teams. 
+@login_required
+def add_team(request):
+
+    if request.method == "POST":
+
+        team = request.POST['new-team']
+
+        new_team = IMG_Teams(team = team)
+        new_team.save()
+
+        teams = IMG_Teams.objects.all()
+        is_user = True
+
+        return render(request, 'MyReport/index.html', {
+            "is_user": is_user,
+            "teams": teams,
+            "message1": "message",
+        })

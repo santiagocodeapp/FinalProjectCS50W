@@ -1,11 +1,48 @@
 {% extends "MyReport/layout.html" %}
 
+<!-- Block that will display updated list of teams for the Coach/add-team Modal -->
+{% block NewTeams %} 
+
+  <div class="w3-section">
+    <label for="exampleDataList1" class="form-label"><strong>New</strong>Team:</label>
+    <input class="w3-input" list="datalistOptions1" id="exampleDataList1" placeholder="" name="new-team">
+    <datalist id="datalistOptions1">
+        {% for team in teams %} 
+        <option value="{{ team }}"></option>
+        {% endfor %} 
+    </datalist>
+</div>
+
+{% endblock %} 
+
+
+<!-- Block that will display updated list of teams for the Coach/add-player Modal -->
+{% block teams %}
+<div class="w3-section">
+    <label for="exampleDataList" class="form-label"><strong>Team:</strong></label>
+    <input class="w3-input" list="datalistOptions" id="exampleDataList" placeholder="" name="exampleDataList">
+    <datalist id="datalistOptions">
+      {% for team in teams %} 
+      <option value="{{ team }}"></option>
+      {% endfor %} 
+    </datalist>
+  </div>
+{% endblock %}
+
 
 {% block body %}
 
+<!-- Script that display message after adding new player to a team -->
 {% if message %}
 <script>
     alert("You have successfully added a new player to the team.")
+</script>
+{% endif %} 
+
+<!-- Script that display message after creating new team -->
+{% if message1 %}
+<script>
+    alert("You have successfully added a new team.")
 </script>
 {% endif %} 
 
@@ -24,3 +61,8 @@
 </div>
 
 {% endblock %}
+
+
+
+
+

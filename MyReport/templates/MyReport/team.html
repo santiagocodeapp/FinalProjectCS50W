@@ -8,6 +8,7 @@
     <h2>IMG {{ team }}</h2>
     <p>Choose a player to write a report.</p><br>
 
+    
     {% for player in players %}
     <div class="w3-third w3-margin-bottom">
         <ul class="w3-ul w3-border w3-hover-shadow">
@@ -27,6 +28,12 @@
           </li>
         </ul>
       </div>
+    {% empty %}
+    <!-- This Script will alert users that their is no players in the team and new player needs to be added -->
+      <script>
+        alert("There are no players available in this team. Add players in the NewPlayers tab.");
+        window.location.replace("{% url 'index' %}");
+      </script>
     {% endfor %} 
 </div>
 {% endblock %}

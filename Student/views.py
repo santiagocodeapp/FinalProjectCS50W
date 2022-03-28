@@ -68,6 +68,8 @@ def student_logout_view(request):
 def student_register(request):
     if request.method == "POST":
         username = request.POST["username"]
+        first = request.POST["first"]
+        last = request.POST["last"]
         email = request.POST["email"]
 
         # Ensure password matches confirmation
@@ -80,7 +82,7 @@ def student_register(request):
 
         # Attempt to create new user
         try:
-            user = User.objects.create_user(username, email, password)
+            user = User.objects.create_user(username, email, password, first_name = first, last_name = last)
             user.save()
         except IntegrityError:
             return render(request, "Student/student-register.html", {

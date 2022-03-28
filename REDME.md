@@ -23,9 +23,9 @@ IMGReportApp is split into 2 main paths "/coach" and "/student".
 ## FinalProject
 This is the main Django Project where two applications are generated, the first called MyReport and the second Student
 
-### MyReport:
-#### views.py:
-##### index:
+## MyReport:
+### views.py:
+#### index:
 
 
 ### ***cerebro.dart*** 
