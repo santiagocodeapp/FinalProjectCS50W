@@ -54,5 +54,14 @@ Here is the template that will be generated dynamically according to how many pl
 #### ***login.html/register.html:***
 This also extends from layout.html and there are only two forms to fill out in order to register or login.
 
+
+# Distinctiveness and Complexity
+This web application is totally different. I am making a product that will help improve an area of my current work and it has nothing to do with the previous projects since in no other project were we writing reports on other people. It's a multi-application Django project. We never did multi-application projects at.
+
+I make use of several models.py and also the use of CSS classes to be able to make the web page look good and also be resizable to different screen sizes or mobile-responsive.
+
+# How to Run:
+Download the source code and just make sure you have the python environment created and activated and use ***"python manage.py runserver"*** to initialize the local host. If it is the first time that you are going to run the code, make sure to do the necessary database migrations with the command ***"python manage.py makemigrations"*** followed by ***"python manage.py migrate"*** and that's it, you will be able to use of the application. NOTE: Be sure to put ***"/coach" or "/student"*** at the end of the URL that the localhost gives you.
+
 # Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
