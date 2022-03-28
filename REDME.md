@@ -26,14 +26,33 @@ This is the main Django Project where two applications are generated, the first 
 ## MyReport:
 ### views.py:
 #### index:
+Returns the list of all teams created and saved in the database as long as the user is logged in.
+#### login_view:
+Authenticate the login of the users with the database in order to gain access.
+#### logout_view:
+Log out users
+#### register:
+Register new users. It asks for their username, first name, last name, email, and password. All these fields are required to send the form. If they do not pass the validation, the new users will not be able to be registered.
+#### send_report:
+This function is responsible for saving the report in the database. The fields are required on the frontend. At the end, the Team function returns, which is responsible for rendering the teams.
+#### team:
+This function takes as an argument the name of the team that will then be used to call the database and return all the players that belong to that team.
+#### add_player:
+This function is responsible for creating new players in the database and assigning them to teams already created in the database.
+#### add_team:
+This function is responsible for creating new teams that will later be filled with players. This way we can organize the players and the different coaches can go directly to their teams and get their players there.
 
 
-### ***cerebro.dart*** 
-Is a file that contains the main function that is CalculatorBrain, inside there are several functions where the body mass index is calculated and depending on the result, the following functions are accessed that result in a possible status according to the user's weight and a little advice according to the weight of the user.
-
-
-### ***Constantes.dart***  
-This is where the various styles are that were used and will be reused throughout the entire app.
+### templates/MyReport:
+#### ***layout.html:***
+This is the main HTML file from which the other files will extend. Here is the JavaScript code and everything and 2 Modal that will be used a lot while using the page.
+#### ***index.html:***
+Several blocks extend into this file. We have the template container that will serve to render the different teams. We also have 2 blocks that extend from the layout.html that will serve to keep the modals updated.
+Here I also add two separate scripts that will let the user know when they create a new team or when they add a new one.
+#### ***team.html:***
+Here is the template that will be generated dynamically according to how many players are on that team. If there are no players on that team an alert will be rendered letting the coach know that there are no players and that they need to be added, then they will be returned to the page where you see the teams.
+#### ***login.html/register.html:***
+This also extends from layout.html and there are only two forms to fill out in order to register or login.
 
 # Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
